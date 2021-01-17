@@ -1,0 +1,33 @@
+version: "3.8"
+services:
+  productservice:
+    build:
+      context: ./ProductService
+      dockerfile: Dockerfile
+    ports: 
+      - "8081:8080"
+    depends_on: 
+      - database
+  frontend:
+    build:
+      context: ./Frontend
+      dockerfile: Dockerfile
+  proxy:
+    build:
+      context: ./Nginx
+      dockerfile: Dockerfile
+    ports:
+      - "8080:80"
+    depends_on: 
+      - frontend
+      - productservice
+  database:
+    image: mysql:latest
+    command: mysqld --init-file="/tmp/database/install_db.sql"
+    restart: always
+    environment: 
+      MYSQL_ROOT_PASSWORD: root@123
+    volumes: 
+      - "./MySQL:/tmp/database"
+    ports:
+      - "3306:3306"
