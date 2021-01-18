@@ -21,6 +21,17 @@ services:
     depends_on: 
       - frontend
       - productservice
+      - keycloak
+  keycloak:
+    image: jboss/keycloak:latest
+    environment: 
+      - KEYCLOAK_USER=root
+      - KEYCLOAK_PASSWORD=root@123
+      - KEYCLOAK_IMPORT=/tmp/realm-import.json
+    ports:
+      - "9000:8080"
+    volumes: 
+      - "./Keycloak/realm-import.json:/tmp/realm-import.json"
   database:
     image: mysql:latest
     command: mysqld --init-file="/tmp/database/install_db.sql"
