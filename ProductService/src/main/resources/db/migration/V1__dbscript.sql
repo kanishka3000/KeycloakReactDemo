@@ -28,9 +28,7 @@ CREATE TABLE component (
   description varchar(255) DEFAULT NULL,
   name varchar(255) DEFAULT NULL,
   product_id bigint DEFAULT NULL,
-  PRIMARY KEY (id),
-  KEY FKpoewr9y6x5uh8aturp7vcw7lk (product_id),
-  CONSTRAINT FKpoewr9y6x5uh8aturp7vcw7lk FOREIGN KEY (product_id) REFERENCES product (id)
+  PRIMARY KEY (id)
 );
 
 INSERT INTO product VALUES (1,'2020-03-21','A purity promise that will last you a lifetime','AVAILABLE','Uniliver','Pureit Ultima 418',44500,3);
