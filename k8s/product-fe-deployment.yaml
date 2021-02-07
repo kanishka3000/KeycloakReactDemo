@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: product-fe-deployment
+  labels:
+    app: product-fe
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: product-fe
+  template:
+    metadata:
+      labels:
+        app: product-fe
+    spec:
+      containers:
+        - name: product-fe
+          image: kanishka3000/product-fe
+          ports:
+            - containerPort: 80
